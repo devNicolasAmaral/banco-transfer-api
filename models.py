@@ -1,10 +1,9 @@
 from uuid import uuid4, UUID
-from sqlalchemy import ForeignKey, String, create_engine, func, Numeric, CheckConstraint
+from sqlalchemy import ForeignKey, String, func, Numeric, CheckConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from decimal import Decimal
 from datetime import datetime
 
-engine = create_engine("postgresql+psycopg2://user:password@host/transfer_database", echo=True)
 
 class Base(DeclarativeBase):
     pass
@@ -43,5 +42,3 @@ class Transfer(Base):
     __table_args__ = (
         CheckConstraint("value > 0.0", name="check_positive_value"),
     )
-
-Base.metadata.create_all(engine)
