@@ -38,11 +38,13 @@ banco-transfer-api/
 │   │   ├── __init__.py
 │   │   ├── config.py
 │   │   └── database.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── models.py
 │   └── __init__.py
 ├── .env.example
 ├── .gitignore
 ├── docker-compose.yaml
-├── models.py
 ├── pyproject.toml
 ├── uv.lock
 ├── LICENSE
