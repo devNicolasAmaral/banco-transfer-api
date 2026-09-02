@@ -13,6 +13,7 @@ O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modela
 - SQLAlchemy
 - PostgreSQL 18
 - Psycopg 2
+- Pydantic
 - Pydantic Settings
 - Docker
 - uv
@@ -28,7 +29,8 @@ Até o momento, o projeto possui:
 - modelos iniciais de contas, transferências e lançamentos financeiros;
 - fábrica e gerenciamento de sessões do SQLAlchemy;
 - relacionamentos e restrições básicas de integridade;
-- migrações versionadas do banco de dados com Alembic.
+- migrações versionadas do banco de dados com Alembic;
+- schemas de entrada e saída com validação por Pydantic.
 
 A API ainda não possui endpoints disponíveis para utilização.
 
@@ -53,6 +55,12 @@ banco-transfer-api/
 │   │   ├── enums.py
 │   │   ├── transfer.py
 │   │   └── user.py
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── account_entry.py
+│   │   ├── transfer.py
+│   │   └── user.py
+│   └── __init__.py
 ├── .env.example
 ├── .gitignore
 ├── alembic.ini
@@ -148,7 +156,6 @@ uv run alembic current
 
 ## Próximas etapas
 
-- criar schemas de entrada e saída com Pydantic;
 - implementar regras de negócio;
 - criar endpoints com FastAPI;
 - adicionar validação e tratamento de erros;
