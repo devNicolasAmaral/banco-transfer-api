@@ -48,8 +48,11 @@ banco-transfer-api/
 │   │   └── database.py
 │   ├── models/
 │   │   ├── __init__.py
-│   │   └── models.py
-│   └── __init__.py
+│   │   ├── account_entry.py
+│   │   ├── base.py
+│   │   ├── enums.py
+│   │   ├── transfer.py
+│   │   └── user.py
 ├── .env.example
 ├── .gitignore
 ├── alembic.ini
@@ -145,7 +148,6 @@ uv run alembic current
 
 ## Próximas etapas
 
-- separar os modelos em módulos próprios;
 - criar schemas de entrada e saída com Pydantic;
 - implementar regras de negócio;
 - criar endpoints com FastAPI;
