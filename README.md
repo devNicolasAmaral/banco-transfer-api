@@ -4,7 +4,7 @@ API backend para simulação de transferências bancárias, desenvolvida com Pyt
 
 O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modelagem de dados, transações no banco de dados, consistência de saldo e organização de uma API financeira.
 
-> Projeto em desenvolvimento. Atualmente, a infraestrutura do banco de dados e a conexão da aplicação com o PostgreSQL estão configuradas.
+> Projeto em desenvolvimento. Atualmente, a conexão com o PostgreSQL, os modelos, as sessões do SQLAlchemy e as migrações do banco de dados estão configurados.
 
 ## Tecnologias
 
@@ -12,10 +12,11 @@ O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modela
 - FastAPI
 - SQLAlchemy
 - PostgreSQL 18
-- Psycopg
+- Psycopg 2
 - Pydantic Settings
 - Docker
 - uv
+- Alembic
 
 ## Estado atual
 
@@ -24,8 +25,10 @@ Até o momento, o projeto possui:
 - PostgreSQL executado em contêiner Docker;
 - configurações carregadas por variáveis de ambiente;
 - conexão entre a aplicação e o banco de dados;
-- modelos iniciais de usuários, transações e transferências;
-- relacionamentos e restrições básicas de integridade.
+- modelos iniciais de contas, transferências e lançamentos financeiros;
+- fábrica e gerenciamento de sessões do SQLAlchemy;
+- relacionamentos e restrições básicas de integridade;
+- migrações versionadas do banco de dados com Alembic.
 
 A API ainda não possui endpoints disponíveis para utilização.
 
@@ -33,6 +36,11 @@ A API ainda não possui endpoints disponíveis para utilização.
 
 ```text
 banco-transfer-api/
+├── alembic/
+│   ├── versions/
+│   ├── env.py
+│   ├── README
+│   └── script.py.mako
 ├── app/
 │   ├── core/
 │   │   ├── __init__.py
@@ -44,6 +52,7 @@ banco-transfer-api/
 │   └── __init__.py
 ├── .env.example
 ├── .gitignore
+├── alembic.ini
 ├── docker-compose.yaml
 ├── pyproject.toml
 ├── uv.lock
@@ -120,12 +129,24 @@ Para iniciá-lo novamente:
 docker compose start
 ```
 
+## Aplicação das migrações
+
+Crie ou atualize as tabelas do banco de dados:
+
+```bash
+uv run alembic upgrade head
+```
+
+Confira a migração atualmente aplicada:
+
+```bash
+uv run alembic current
+```
+
 ## Próximas etapas
 
-- reorganizar os modelos dentro do pacote `app`;
-- configurar sessões do SQLAlchemy;
-- adicionar migrações com Alembic;
-- revisar a modelagem das transferências;
+- separar os modelos em módulos próprios;
+- criar schemas de entrada e saída com Pydantic;
 - implementar regras de negócio;
 - criar endpoints com FastAPI;
 - adicionar validação e tratamento de erros;

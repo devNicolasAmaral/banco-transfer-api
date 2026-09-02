@@ -5,6 +5,7 @@ from uuid import uuid4, UUID
 
 from sqlalchemy import (
     CheckConstraint,
+    DateTime,
     Enum as SqlEnum,
     ForeignKey,
     Numeric,
@@ -64,6 +65,7 @@ class Transfer(Base):
         default=uuid4,
     )
     created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
         server_default=func.now(),
         nullable=False,
     )
