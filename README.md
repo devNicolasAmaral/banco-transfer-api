@@ -4,7 +4,7 @@ API backend para simulação de transferências bancárias, desenvolvida com Pyt
 
 O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modelagem de dados, transações no banco de dados, consistência de saldo e organização de uma API financeira.
 
-> Projeto em desenvolvimento. Atualmente, a infraestrutura do banco de dados, os modelos, os schemas e os serviços de usuários e transferências estão configurados.
+> Projeto em desenvolvimento. Atualmente, a infraestrutura do banco de dados, os modelos, os schemas, os serviços e os endpoints iniciais de usuários estão configurados.
 
 ## Tecnologias
 
@@ -32,9 +32,11 @@ Até o momento, o projeto possui:
 - migrações versionadas do banco de dados com Alembic;
 - schemas de entrada e saída com validação por Pydantic;
 - serviços para cadastro e consulta de usuários;
-- transferências atômicas com bloqueio de contas, validação de saldo e rollback automático.
+- transferências atômicas com bloqueio de contas, validação de saldo e rollback automático;
+- endpoints para cadastro e consulta de usuários;
+- documentação automática com OpenAPI e Swagger UI.
 
-A API ainda não possui endpoints disponíveis para utilização.
+A API possui endpoints iniciais de usuários. O endpoint de transferências ainda está em desenvolvimento.
 
 ## Estrutura do projeto
 
@@ -57,6 +59,9 @@ banco-transfer-api/
 │   │   ├── enums.py
 │   │   ├── transfer.py
 │   │   └── user.py
+│   ├── routers/
+│   │   ├── __init__.py
+│   │   └── user.py
 │   ├── schemas/
 │   │   ├── __init__.py
 │   │   ├── account_entry.py
@@ -67,7 +72,8 @@ banco-transfer-api/
 │   │   ├── exceptions.py
 │   │   ├── transfer.py
 │   │   └── user.py
-│   └── __init__.py
+│   ├── __init__.py
+│   └── main.py
 ├── .env.example
 ├── .gitignore
 ├── alembic.ini
@@ -161,9 +167,23 @@ Confira a migração atualmente aplicada:
 uv run alembic current
 ```
 
+## Execução da API
+
+Inicie o servidor de desenvolvimento:
+
+```bash
+uv run uvicorn app.main:app --reload
+```
+
+Acesse a documentação interativa:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
 ## Próximas etapas
 
-- criar endpoints com FastAPI;
+- criar o endpoint de transferências;
 - mapear erros de negócio para respostas HTTP;
 - desenvolver testes automatizados;
 - documentar os endpoints da API.
