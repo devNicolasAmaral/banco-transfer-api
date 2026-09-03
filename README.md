@@ -1,10 +1,10 @@
 # Banco Transfer API
 
-API backend para simulação de transferências bancárias, desenvolvida com Python, FastAPI, SQLAlchemy e PostgreSQL.
+API REST para simulação de transferências bancárias, desenvolvida com Python, FastAPI, SQLAlchemy e PostgreSQL.
 
-O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modelagem de dados, transações no banco de dados, consistência de saldo e organização de uma API financeira.
+O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modelagem de dados, transações atômicas, consistência de saldo e organização em camadas de uma API financeira.
 
-> Projeto em desenvolvimento. Atualmente, a infraestrutura do banco de dados, os modelos, os schemas, os serviços e os endpoints iniciais de usuários estão configurados.
+> Projeto em desenvolvimento. A persistência de dados, as regras iniciais de negócio e os primeiros endpoints da API já estão implementados.
 
 ## Tecnologias
 
@@ -12,9 +12,9 @@ O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modela
 - FastAPI
 - SQLAlchemy
 - PostgreSQL 18
-- Psycopg 2
+- psycopg2-binary
 - Pydantic
-- Pydantic Settings
+- pydantic-settings
 - Docker
 - uv
 - Alembic
@@ -23,20 +23,15 @@ O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modela
 
 Até o momento, o projeto possui:
 
-- PostgreSQL executado em contêiner Docker;
-- configurações carregadas por variáveis de ambiente;
-- conexão entre a aplicação e o banco de dados;
-- modelos iniciais de contas, transferências e lançamentos financeiros;
-- fábrica e gerenciamento de sessões do SQLAlchemy;
-- relacionamentos e restrições básicas de integridade;
-- migrações versionadas do banco de dados com Alembic;
-- schemas de entrada e saída com validação por Pydantic;
-- serviços para cadastro e consulta de usuários;
-- transferências atômicas com bloqueio de contas, validação de saldo e rollback automático;
+- PostgreSQL em Docker, configurações por variáveis de ambiente e sessões com SQLAlchemy;
+- modelos de contas, transferências e lançamentos, com relacionamentos e restrições de integridade;
+- migrações versionadas com Alembic;
+- schemas de entrada e saída validados com Pydantic;
 - endpoints para cadastro e consulta de usuários;
-- documentação automática com OpenAPI e Swagger UI.
+- endpoint para realização de transferências, executadas atomicamente com bloqueio de contas, validação de saldo e rollback automático;
+- documentação com OpenAPI e Swagger UI.
 
-A API possui endpoints iniciais de usuários. O endpoint de transferências ainda está em desenvolvimento.
+> Limitação atual: novas contas são criadas com saldo zero e ainda não existe uma operação para adicionar saldo pela API.
 
 ## Estrutura do projeto
 
@@ -61,6 +56,7 @@ banco-transfer-api/
 │   │   └── user.py
 │   ├── routers/
 │   │   ├── __init__.py
+│   │   ├── transfer.py
 │   │   └── user.py
 │   ├── schemas/
 │   │   ├── __init__.py
@@ -183,10 +179,16 @@ http://127.0.0.1:8000/docs
 
 ## Próximas etapas
 
-- criar o endpoint de transferências;
-- mapear erros de negócio para respostas HTTP;
-- desenvolver testes automatizados;
-- documentar os endpoints da API.
+- desenvolver testes unitários para schemas e serviços;
+- desenvolver testes de integração para endpoints, banco de dados e rollback;
+- testar transferências concorrentes e a prevenção de saldo inconsistente;
+- definir uma operação segura para adicionar saldo às contas;
+- implementar idempotência para evitar transferências duplicadas;
+- centralizar e padronizar o tratamento de exceções da API;
+- criar endpoints para consulta de transferências e extrato das contas;
+- configurar ferramentas de lint e verificação de tipos;
+- adicionar uma pipeline de integração contínua;
+- documentar os endpoints e exemplos de requisição no README.
 
 ## Licença
 
