@@ -4,7 +4,7 @@ API backend para simulação de transferências bancárias, desenvolvida com Pyt
 
 O projeto tem como objetivo aplicar conceitos de desenvolvimento backend, modelagem de dados, transações no banco de dados, consistência de saldo e organização de uma API financeira.
 
-> Projeto em desenvolvimento. Atualmente, a infraestrutura do banco de dados, os modelos, os schemas e o serviço inicial de usuários estão configurados.
+> Projeto em desenvolvimento. Atualmente, a infraestrutura do banco de dados, os modelos, os schemas e os serviços de usuários e transferências estão configurados.
 
 ## Tecnologias
 
@@ -31,7 +31,8 @@ Até o momento, o projeto possui:
 - relacionamentos e restrições básicas de integridade;
 - migrações versionadas do banco de dados com Alembic;
 - schemas de entrada e saída com validação por Pydantic;
-- serviço inicial para cadastro e consulta de usuários.
+- serviços para cadastro e consulta de usuários;
+- transferências atômicas com bloqueio de contas, validação de saldo e rollback automático.
 
 A API ainda não possui endpoints disponíveis para utilização.
 
@@ -63,6 +64,8 @@ banco-transfer-api/
 │   │   └── user.py
 │   ├── services/
 │   │   ├── __init__.py
+│   │   ├── exceptions.py
+│   │   ├── transfer.py
 │   │   └── user.py
 │   └── __init__.py
 ├── .env.example
@@ -160,9 +163,8 @@ uv run alembic current
 
 ## Próximas etapas
 
-- implementar regras de negócio;
 - criar endpoints com FastAPI;
-- adicionar validação e tratamento de erros;
+- mapear erros de negócio para respostas HTTP;
 - desenvolver testes automatizados;
 - documentar os endpoints da API.
 
