@@ -30,7 +30,7 @@ Até o momento, o projeto possui:
 * schemas de entrada e saída validados com Pydantic;
 * endpoints para cadastro e consulta de usuários;
 * endpoint para transferências atômicas, com bloqueio de contas, validação de saldo e rollback automático;
-* testes automatizados iniciais para validação dos schemas;
+* testes unitários dos schemas, cobrindo regras de validação, limites e conversão de respostas;
 * documentação com OpenAPI e Swagger UI.
 
 > Limitação atual: novas contas são criadas com saldo zero e ainda não existe uma operação para adicionar saldo pela API.
@@ -74,6 +74,7 @@ banco-transfer-api/
 │   └── main.py
 ├── tests/
 │   └── schemas/
+│       ├── test_account_entry.py
 │       ├── test_transfer.py
 │       └── test_user.py
 ├── .env.example
@@ -195,7 +196,6 @@ docker compose start
 
 ## Próximas etapas
 
-* ampliar os testes unitários dos schemas;
 * desenvolver testes de integração para serviços, endpoints, banco de dados e rollback;
 * testar transferências concorrentes e a prevenção de saldo inconsistente;
 * definir uma operação segura para adicionar saldo às contas;
