@@ -85,7 +85,7 @@ def test_create_transfer_rejects_insufficient_balance(
 
     assert sender.balance == Decimal("20.00")
     assert receiver.balance == Decimal("50.00")
-    
+
     db_session.commit()
 
     transfer_data = TransferCreate(
@@ -105,4 +105,3 @@ def test_create_transfer_rejects_insufficient_balance(
     assert receiver.balance == Decimal("50.00")
     assert db_session.query(Transfer).count() == 0
     assert db_session.query(AccountEntry).count() == 0
-    
